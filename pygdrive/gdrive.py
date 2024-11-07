@@ -146,7 +146,7 @@ class Gdrive:
         results = (
             self.service.files()
             .list(
-                fields="nextPageToken, files(id, name)",
+                fields="nextPageToken, files(id, name, mimeType)",
                 orderBy="createdTime",
                 q=f"'{folder_id}' in parents and {file_search}",
             )
