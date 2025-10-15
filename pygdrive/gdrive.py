@@ -248,6 +248,19 @@ class Gdrive:
         )
         return file["id"]
 
+    def rename_file(self, file_id, file_name):
+        # First retrieve the file from the API.
+        file_metadata = self.service.files().get(fileId=file_id).execute()
+        # File's new metadata.
+        file_metadata['name'] = file_name
+
+        # Send the request to the API.
+        updated_file = self.service.files().update(
+            fileId=file_id,
+            body=file_metadata).execute()
+
+        return updated_file["id"]
+
     # def delete_file(self, file_id):
     #     """
     #     delete file or folder by id
